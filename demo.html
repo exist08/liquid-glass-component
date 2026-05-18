@@ -2,8 +2,116 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LiquidGlass — Component Demo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<!-- ─── Primary SEO ─────────────────────────────────────────── -->
+<title>LiquidGlass — Apple-style liquid glass for React · Interactive playground</title>
+<meta name="description" content="LiquidGlass is a single React component that renders real liquid glass — true refraction with SVG feDisplacementMap over backdrop-filter. Tweak variant, tint, noise, scale, blur, wobble, and drag in this live playground and copy the generated TSX.">
+<meta name="keywords" content="liquid glass, glassmorphism, React glass component, liquid glass effect, Apple liquid glass, iOS 26 glass, backdrop-filter, SVG feDisplacementMap, displacement filter, frosted glass, React UI library, glass button, refraction effect, glass morphism">
+<meta name="author" content="LiquidGlass">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="theme-color" content="#080810">
+<meta name="color-scheme" content="dark">
+<link rel="canonical" href="https://liquidglass.dev/demo.html">
+
+<!-- ─── Open Graph ──────────────────────────────────────────── -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="LiquidGlass">
+<meta property="og:title" content="LiquidGlass — Apple-style liquid glass for React">
+<meta property="og:description" content="Live playground for the LiquidGlass React component. Tweak variant, tint, noise, scale, blur, wobble, and drag — copy the TSX that matches.">
+<meta property="og:url" content="https://liquidglass.dev/demo.html">
+<meta property="og:image" content="https://liquidglass.dev/og.png">
+<meta property="og:image:alt" content="LiquidGlass — a glass pill refracting an aerial photo of an autumn forest">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_US">
+
+<!-- ─── Twitter ─────────────────────────────────────────────── -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="LiquidGlass — liquid glass for React">
+<meta name="twitter:description" content="Real refraction, not a frosted rectangle. One component, every prop. Try the live playground.">
+<meta name="twitter:image" content="https://liquidglass.dev/og.png">
+<meta name="twitter:image:alt" content="LiquidGlass component preview">
+
+<!-- ─── Favicons ────────────────────────────────────────────── -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3CradialGradient id='g' cx='35%25' cy='30%25'%3E%3Cstop offset='0' stop-color='%23c4b5fd'/%3E%3Cstop offset='1' stop-color='%237c3aed'/%3E%3C/radialGradient%3E%3C/defs%3E%3Cpath fill='url(%23g)' d='M32 4C20 22 12 32 12 42a20 20 0 0 0 40 0c0-10-8-20-20-38z'/%3E%3Cellipse cx='26' cy='32' rx='5' ry='8' fill='%23fff' opacity='.45'/%3E%3C/svg%3E">
+
+<!-- ─── Preload hero image ──────────────────────────────────── -->
+<link rel="preload" as="image" href="aerial.jpg" fetchpriority="high">
+
+<!-- ─── JSON-LD: SoftwareApplication ────────────────────────── -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "LiquidGlass",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Web, Any (browser)",
+  "description": "A single React component that renders real liquid glass using SVG feDisplacementMap over backdrop-filter. Configurable shape, tint, noise, scale, blur, wobble, and drag.",
+  "url": "https://liquidglass.dev/",
+  "image": "https://liquidglass.dev/og.png",
+  "softwareVersion": "0.1.0",
+  "programmingLanguage": "TypeScript",
+  "license": "https://opensource.org/licenses/MIT",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "keywords": "liquid glass, glassmorphism, React component, backdrop-filter, SVG feDisplacementMap, refraction"
+}
+</script>
+
+<!-- ─── JSON-LD: BreadcrumbList ─────────────────────────────── -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "LiquidGlass", "item": "https://liquidglass.dev/" },
+    { "@type": "ListItem", "position": 2, "name": "Interactive playground", "item": "https://liquidglass.dev/demo.html" }
+  ]
+}
+</script>
+
+<!-- ─── JSON-LD: FAQ for rich results ───────────────────────── -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is LiquidGlass?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "LiquidGlass is a single React component that renders real liquid-glass refraction using SVG feDisplacementMap inside a backdrop-filter, instead of a flat blurred rectangle."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is it different from regular glassmorphism?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Standard glassmorphism uses backdrop-filter: blur(). LiquidGlass adds a noise-driven SVG displacement map on top, so the backdrop is actually warped — like real curved glass — not just blurred."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which browsers support LiquidGlass?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Chrome and Edge 85+, Safari 14+, and Firefox 103+. On older browsers it gracefully degrades to a tinted rectangle."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is LiquidGlass free to use?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes — LiquidGlass is MIT-licensed and free for personal and commercial use."
+      }
+    }
+  ]
+}
+</script>
+
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
@@ -31,15 +139,49 @@
 
   /* ── Layout ── */
   .page { max-width: 900px; margin: 0 auto; padding: 48px 24px 80px; }
-  h1 { font-size: 28px; font-weight: 700; color: #fff; margin-bottom: 6px; }
-  .lead { color: var(--muted); margin-bottom: 48px; font-size: 13px; }
+  .site-header { margin-bottom: 48px; }
+  h1 { font-size: 28px; font-weight: 700; color: #fff; margin-bottom: 6px; line-height: 1.2; }
+  .lead { color: var(--muted); font-size: 13px; max-width: 640px; line-height: 1.6; }
+  .lead a { color: #a78bfa; text-decoration: none; border-bottom: 1px solid rgba(167,139,250,0.3); }
+  .lead a:hover { color: #c4b5fd; border-bottom-color: rgba(167,139,250,0.6); }
 
   .section { margin-bottom: 56px; }
-  .section-title {
+  h2.section-title, .section-title {
     font-size: 10px; font-weight: 600; letter-spacing: 0.16em;
-    text-transform: uppercase; color: #a78bfa; margin-bottom: 6px;
+    text-transform: uppercase; color: #a78bfa; margin-bottom: 6px; line-height: 1.4;
   }
-  .section-desc { font-size: 12px; color: var(--muted); margin-bottom: 20px; }
+  .section-desc { font-size: 12px; color: var(--muted); margin-bottom: 20px; max-width: 720px; line-height: 1.6; }
+
+  /* Footer */
+  .site-footer {
+    margin-top: 64px;
+    padding-top: 28px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .site-footer a {
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    margin-right: 16px;
+    transition: color 0.15s ease;
+  }
+  .site-footer a:last-child { margin-right: 0; }
+  .site-footer a:hover { color: #a78bfa; }
+  .site-footer .brand { color: #a78bfa; font-weight: 600; letter-spacing: 0.04em; }
+
+  /* Visually hidden — content for screen readers and search crawlers */
+  .sr-only {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0,0,0,0);
+    white-space: nowrap; border: 0;
+  }
 
   /* ── Stage — the colorful background behind glass ── */
   .stage {
@@ -337,14 +479,27 @@
 </svg>
 
 <div class="page">
-  <h1>💧 LiquidGlass</h1>
-  <p class="lead">One component. All props. </p>
+  <header class="site-header">
+    <h1>💧 LiquidGlass</h1>
+    <p class="lead">
+      A single React component that renders <strong>real liquid glass</strong> —
+      true refraction, not a blurred rectangle. Tweak every prop in the playground below and copy the matching TSX.
+    </p>
+    <p class="sr-only">
+      LiquidGlass is an open-source React component for Apple-style liquid glass and glassmorphism effects.
+      Configure variant (pill, rounded, circle, squircle, sharp), tint, noise type (fBm, ridged, curl, fine grain, crystal),
+      displacement scale, blur, wobble animation, and cursor-follow drag.
+      MIT licensed, ~3 KB gzipped, works in Chrome 85+, Safari 14+, and Firefox 103+.
+    </p>
+  </header>
+
+  <main>
 
   <!-- ══════════════════════════════════════════════════
        INTERACTIVE PLAYGROUND
   ══════════════════════════════════════════════════ -->
-  <div class="section">
-    <div class="section-title">Interactive Playground</div>
+  <section class="section" aria-labelledby="playground-title">
+    <h2 id="playground-title" class="section-title">Interactive Playground</h2>
     <p class="section-desc">Tweak every prop in real time. The aerial photo behind the glass makes the displacement and refraction effects easy to see — the code snippet at the bottom updates as you go.</p>
 
     <div class="playground">
@@ -424,7 +579,7 @@
       </div>
     </div>
 
-    <div class="code-wrap">
+    <div class="code-wrap" aria-label="Live TSX code for current playground settings">
       <div class="code-bar">
         <div class="dot" style="background:#ff5f57"></div>
         <div class="dot" style="background:#febc2e"></div>
@@ -433,13 +588,14 @@
       </div>
       <pre id="play-code"></pre>
     </div>
-  </div>
+  </section>
 
   <!-- ══════════════════════════════════════════════════
        REACT USAGE CODE
   ══════════════════════════════════════════════════ -->
-  <div class="section">
-    <div class="section-title">React Usage</div>
+  <section class="section" aria-labelledby="usage-title">
+    <h2 id="usage-title" class="section-title">React Usage</h2>
+    <p class="section-desc">Drop-in examples — minimal, fully-customized, and polymorphic (render as a link, div, or any element via the <code>as</code> prop).</p>
     <div class="code-wrap">
       <div class="code-bar"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div><span class="lang">TSX</span></div>
       <pre><span class="ck">import</span> { LiquidGlass } <span class="ck">from</span> <span class="cs">'liquidglass'</span>
@@ -487,7 +643,20 @@
 <span class="cm">// As nav link</span>
 <span class="ck">&lt;LiquidGlass</span> <span class="ca">as</span>=<span class="cs">"a"</span> <span class="ca">href</span>=<span class="cs">"/about"</span> <span class="ca">variant</span>=<span class="cs">"pill"</span> <span class="ca">scale</span>={<span class="cp">12</span>}<span class="ck">&gt;</span>About<span class="ck">&lt;/LiquidGlass&gt;</span></pre>
     </div>
-  </div>
+  </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div>
+      <span class="brand">💧 LiquidGlass</span> &middot; MIT licensed &middot; React 18+
+    </div>
+    <nav aria-label="Footer">
+      <a href="README.md">Docs</a>
+      <a href="https://www.npmjs.com/package/liquidglass" rel="noopener">npm</a>
+      <a href="https://github.com/" rel="noopener">GitHub</a>
+    </nav>
+  </footer>
 
 </div>
 

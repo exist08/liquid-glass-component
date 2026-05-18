@@ -9,8 +9,9 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsc",
-    "dev": "tsc --watch"
+    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "dev": "tsc --watch",
+    "prepublishOnly": "npm run build"
   },
   "peerDependencies": {
     "react": ">=18.0.0",
@@ -19,6 +20,7 @@
   "devDependencies": {
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
+    "tsup": "^8.5.1",
     "typescript": "^5.4.0"
   },
   "keywords": [

@@ -1,1 +1,40 @@
-node_modules
+# Dependencies
+node_modules/
+
+# Build output — omit from git; run `npm run build` before `npm publish`.
+# If you prefer to commit built files, delete the next line.
+dist/
+
+# Logs & debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE / editors
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Test / coverage
+coverage/
+.nyc_output/
+
+# TypeScript / tooling
+*.tsbuildinfo
+.eslintcache
+
+# Packed tarball from `npm pack`
+*.tgz

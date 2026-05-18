@@ -1,0 +1,20 @@
+# ── LiquidGlass — published tarball hygiene ────────────────────────────────
+# package.json already has "files": ["dist"], so ONLY `dist/` + npm defaults
+# (e.g. README, LICENSE) are shipped. This file excludes extra noise from `dist`
+# and acts as a safety net if `files` is ever widened.
+
+# Source maps — remove these two lines if you want consumers to get .map files
+**/*.map
+
+# Never publish (belt-and-suspenders if "files" is relaxed later)
+src/
+tsconfig.json
+demo.html
+aerial.jpg
+*.tgz
+coverage/
+.nyc_output/
+**/.DS_Store
+.github/
+.env
+.env.*

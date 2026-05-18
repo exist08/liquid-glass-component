@@ -1,6 +1,6 @@
 {
   "name": "liquid-glass-component",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "One component. Infinite liquid glass variants. SVG feDisplacementMap + feImage.",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",

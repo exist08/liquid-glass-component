@@ -1,11 +1,13 @@
 {
   "name": "liquid-glass-component",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "One component. Infinite liquid glass variants. SVG feDisplacementMap + feImage.",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch"
@@ -19,6 +21,13 @@
     "@types/react-dom": "^18.0.0",
     "typescript": "^5.4.0"
   },
-  "keywords": ["liquid-glass", "react", "svg", "glassmorphism", "displacement", "ui"],
+  "keywords": [
+    "liquid-glass",
+    "react",
+    "svg",
+    "glassmorphism",
+    "displacement",
+    "ui"
+  ],
   "license": "MIT"
 }

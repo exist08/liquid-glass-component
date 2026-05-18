@@ -11,7 +11,7 @@ Pure actual refraction, not a blurred rectangle.
 [![types](https://img.shields.io/badge/types-TypeScript-3178c6.svg)](#)
 [![bundle](https://img.shields.io/badge/gzipped-~3kB-fbbf24.svg)](#)
 
-**[▶ Live playground](./demo.html)** &middot; [Install](#install) &middot; [API](#props) &middot; [Recipes](#recipes)
+**[▶ Live playground](https://exist08.github.io/liquid-glass-component/)** &middot; [Install](#install) &middot; [API](#props) &middot; [Recipes](#recipes)
 
 </div>
 

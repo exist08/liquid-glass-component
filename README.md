@@ -6,8 +6,8 @@
 
 Pure actual refraction, not a blurred rectangle.
 
-[![npm](https://img.shields.io/npm/v/liquidglass.svg?color=a78bfa&label=npm)](https://www.npmjs.com/package/liquidglass)
-[![license](https://img.shields.io/npm/l/liquidglass.svg?color=86efac)](LICENSE)
+[![npm](https://img.shields.io/npm/v/liquid-glass-component.svg?color=a78bfa&label=npm)](https://www.npmjs.com/package/liquid-glass-component)
+[![license](https://img.shields.io/npm/l/liquid-glass-component.svg?color=86efac)](LICENSE)
 [![types](https://img.shields.io/badge/types-TypeScript-3178c6.svg)](#)
 [![bundle](https://img.shields.io/badge/gzipped-~3kB-fbbf24.svg)](#)
 
@@ -31,11 +31,11 @@ Pure actual refraction, not a blurred rectangle.
 ## Install
 
 ```bash
-npm install liquidglass
+npm install liquid-glass-component
 # or
-pnpm add liquidglass
+pnpm add liquid-glass-component
 # or
-yarn add liquidglass
+yarn add liquid-glass-component
 ```
 
 > Requires **React 18+**. No build step. No CSS file to import.
@@ -45,7 +45,7 @@ yarn add liquidglass
 ## Quick start
 
 ```tsx
-import { LiquidGlass } from 'liquidglass'
+import { LiquidGlass } from 'liquid-glass-component'
 
 export default function App() {
   return (

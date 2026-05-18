@@ -116,6 +116,184 @@
     z-index: 2;
   }
 
+  /* ── Playground ── */
+  .playground {
+    display: grid;
+    grid-template-columns: minmax(0, 1.45fr) minmax(280px, 1fr);
+    gap: 18px;
+    margin-bottom: 20px;
+  }
+  @media (max-width: 760px) {
+    .playground { grid-template-columns: 1fr; }
+  }
+
+  .stage-photo {
+    background: url('aerial.jpg') center / cover no-repeat;
+    min-height: 380px;
+    padding: 56px 32px;
+  }
+  .stage-photo::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.18) 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .stage-photo .glass { z-index: 2; }
+
+  .controls {
+    background: rgba(255,255,255,0.025);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .control-group { display: flex; flex-direction: column; gap: 8px; }
+  .control-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #a78bfa;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .control-value {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: #c084fc;
+    background: rgba(167,139,250,0.10);
+    padding: 2px 8px;
+    border-radius: 6px;
+    letter-spacing: 0;
+    text-transform: none;
+    font-weight: 500;
+  }
+
+  .chip-row { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip {
+    position: relative;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    padding: 7px 12px;
+    font-size: 11px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.7);
+    font-family: inherit;
+    cursor: pointer;
+    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+    letter-spacing: 0.03em;
+  }
+  .chip:hover { background: rgba(255,255,255,0.06); color: #fff; }
+  .chip.active {
+    background: rgba(167,139,250,0.18);
+    border-color: rgba(167,139,250,0.5);
+    color: #f5f3ff;
+    box-shadow: 0 0 0 1px rgba(167,139,250,0.15) inset;
+  }
+  .chip.swatch { padding-left: 24px; }
+  .chip.swatch::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--sw, #fff);
+    border: 1px solid rgba(255,255,255,0.25);
+  }
+
+  input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    width: 100%;
+    height: 20px;
+    cursor: pointer;
+  }
+  input[type="range"]::-webkit-slider-runnable-track {
+    height: 4px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 4px;
+  }
+  input[type="range"]::-moz-range-track {
+    height: 4px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 4px;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 14px;
+    width: 14px;
+    border-radius: 50%;
+    background: #a78bfa;
+    margin-top: -5px;
+    border: none;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.5), 0 0 0 4px rgba(167,139,250,0.18);
+  }
+  input[type="range"]::-moz-range-thumb {
+    height: 14px;
+    width: 14px;
+    border-radius: 50%;
+    background: #a78bfa;
+    border: none;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.5), 0 0 0 4px rgba(167,139,250,0.18);
+  }
+
+  .toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .toggle input { display: none; }
+  .toggle-track {
+    width: 36px;
+    height: 20px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 999px;
+    position: relative;
+    transition: background 0.2s ease;
+    flex-shrink: 0;
+  }
+  .toggle-thumb {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    background: rgba(255,255,255,0.92);
+    border-radius: 50%;
+    transition: transform 0.2s ease;
+  }
+  .toggle input:checked + .toggle-track {
+    background: rgba(167,139,250,0.6);
+  }
+  .toggle input:checked + .toggle-track .toggle-thumb {
+    transform: translateX(16px);
+  }
+  .toggle-label {
+    font-size: 12px;
+    color: rgba(255,255,255,0.85);
+    letter-spacing: 0.02em;
+  }
+  .toggles { gap: 12px; }
+
+  /* Drag mode — glass follows cursor inside the stage */
+  .stage.is-drag { cursor: none; }
+  .stage.is-drag .glass { pointer-events: none; }
+  .stage.is-drag .glass.dragging { position: absolute; left: 0; top: 0; }
+
   /* ── Code block ── */
   .code-wrap {
     background: #0a0a12;
@@ -146,374 +324,114 @@
 <body>
 
 <!-- ═══════════════════════════════════════════════════════
-     HIDDEN SVG FILTERS
-     These live in the DOM. backdrop-filter:url(#id) reads them.
-     One filter per unique noise config.
+     HIDDEN SVG FILTER — driven entirely by the playground.
+     backdrop-filter:url(#lgPlay) reads it.
 ════════════════════════════════════════════════════════ -->
 <svg style="position:absolute;width:0;height:0;overflow:hidden;" aria-hidden="true">
   <defs>
-
-    <!-- Filter A: default fBm, scale 20 — used for most examples -->
-    <filter id="lgA" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
-      <feImage id="lgA-img" preserveAspectRatio="none" result="tex"/>
-      <feDisplacementMap id="lgA-dm" in="SourceGraphic" in2="tex" scale="20" xChannelSelector="R" yChannelSelector="G"/>
+    <filter id="lgPlay" x="-30%" y="-30%" width="160%" height="160%" color-interpolation-filters="sRGB">
+      <feImage id="lgPlay-img" preserveAspectRatio="none" result="tex"/>
+      <feDisplacementMap id="lgPlay-dm" in="SourceGraphic" in2="tex" scale="20" xChannelSelector="R" yChannelSelector="G"/>
     </filter>
-
-    <!-- Filter B: ridged noise, heavier scale — obsidian/venom feel -->
-    <filter id="lgB" x="-25%" y="-25%" width="150%" height="150%" color-interpolation-filters="sRGB">
-      <feImage id="lgB-img" preserveAspectRatio="none" result="tex"/>
-      <feDisplacementMap id="lgB-dm" in="SourceGraphic" in2="tex" scale="38" xChannelSelector="R" yChannelSelector="G"/>
-    </filter>
-
-    <!-- Filter C: curl noise, swirly — soap/holo feel -->
-    <filter id="lgC" x="-25%" y="-25%" width="150%" height="150%" color-interpolation-filters="sRGB">
-      <feImage id="lgC-img" preserveAspectRatio="none" result="tex"/>
-      <feDisplacementMap id="lgC-dm" in="SourceGraphic" in2="tex" scale="16" xChannelSelector="R" yChannelSelector="G"/>
-    </filter>
-
-    <!-- Filter D: high frequency, fine grain -->
-    <filter id="lgD" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
-      <feImage id="lgD-img" preserveAspectRatio="none" result="tex"/>
-      <feDisplacementMap id="lgD-dm" in="SourceGraphic" in2="tex" scale="14" xChannelSelector="R" yChannelSelector="G"/>
-    </filter>
-
-    <!-- Filter E: ultra high scale — crystal/maximum -->
-    <filter id="lgE" x="-30%" y="-30%" width="160%" height="160%" color-interpolation-filters="sRGB">
-      <feImage id="lgE-img" preserveAspectRatio="none" result="tex"/>
-      <feDisplacementMap id="lgE-dm" in="SourceGraphic" in2="tex" scale="55" xChannelSelector="R" yChannelSelector="G"/>
-    </filter>
-
   </defs>
 </svg>
 
 <div class="page">
   <h1>💧 LiquidGlass</h1>
-  <p class="lead">One component. All props. Pure SVG <code>feDisplacementMap</code> via <code>backdrop-filter: url()</code>.</p>
+  <p class="lead">One component. All props. </p>
 
   <!-- ══════════════════════════════════════════════════
-       HOW IT WORKS
+       INTERACTIVE PLAYGROUND
   ══════════════════════════════════════════════════ -->
   <div class="section">
-    <div class="section-title">The fix — how backdrop-filter url() works</div>
-    <p class="section-desc">
-      The SVG filter lives in the document (not inside the element). <code>backdrop-filter: url(#filterId)</code>
-      applies it to everything <em>behind</em> the element — displacing the backdrop, not the element itself.
-      This is the difference between real liquid glass and just blurring.
-    </p>
+    <div class="section-title">Interactive Playground</div>
+    <p class="section-desc">Tweak every prop in real time. The aerial photo behind the glass makes the displacement and refraction effects easy to see — the code snippet at the bottom updates as you go.</p>
+
+    <div class="playground">
+      <div class="stage stage-photo" id="play-stage">
+        <button class="glass" id="play-glass"
+          style="border-radius:9999px;padding:18px 48px;color:rgba(255,255,255,0.95);font-size:14px;">
+          <span class="glass-surface" id="play-surface"
+            style="border-radius:9999px;backdrop-filter:url(#lgPlay);-webkit-backdrop-filter:url(#lgPlay);background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.22);"></span>
+          <span class="glass-specular" id="play-specular"></span>
+          <span class="glass-label" id="play-label">Liquid Glass</span>
+        </button>
+      </div>
+
+      <div class="controls">
+        <div class="control-group">
+          <div class="control-label"><span>Shape</span></div>
+          <div class="chip-row" data-control="shape">
+            <button class="chip active" data-value="pill">Pill</button>
+            <button class="chip" data-value="rounded">Rounded</button>
+            <button class="chip" data-value="circle">Circle</button>
+            <button class="chip" data-value="squircle">Squircle</button>
+            <button class="chip" data-value="sharp">Sharp</button>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <div class="control-label"><span>Tint</span></div>
+          <div class="chip-row" data-control="tint">
+            <button class="chip swatch active" data-value="white"   style="--sw:rgba(255,255,255,0.7)">White</button>
+            <button class="chip swatch"        data-value="black"   style="--sw:rgba(0,0,0,0.7)">Black</button>
+            <button class="chip swatch"        data-value="ember"   style="--sw:#f97316">Ember</button>
+            <button class="chip swatch"        data-value="nebula"  style="--sw:#8b5cf6">Nebula</button>
+            <button class="chip swatch"        data-value="venom"   style="--sw:#22c55e">Venom</button>
+            <button class="chip swatch"        data-value="crystal" style="--sw:#e0f2fe">Crystal</button>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <div class="control-label"><span>Noise Type</span></div>
+          <div class="chip-row" data-control="noise">
+            <button class="chip active" data-value="fbm">fBm</button>
+            <button class="chip"        data-value="ridged">Ridged</button>
+            <button class="chip"        data-value="curl">Curl</button>
+            <button class="chip"        data-value="fine">Fine Grain</button>
+            <button class="chip"        data-value="crystal">Crystal</button>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <div class="control-label">
+            <span>Scale — warp intensity</span>
+            <span class="control-value" id="val-scale">20</span>
+          </div>
+          <input type="range" id="play-scale" min="0" max="120" step="1" value="20">
+        </div>
+
+        <div class="control-group">
+          <div class="control-label">
+            <span>Blur</span>
+            <span class="control-value" id="val-blur">0px</span>
+          </div>
+          <input type="range" id="play-blur" min="0" max="30" step="1" value="0">
+        </div>
+
+        <div class="control-group toggles">
+          <label class="toggle">
+            <input type="checkbox" id="play-wobble">
+            <span class="toggle-track"><span class="toggle-thumb"></span></span>
+            <span class="toggle-label">Wobble animation</span>
+          </label>
+          <label class="toggle">
+            <input type="checkbox" id="play-drag">
+            <span class="toggle-track"><span class="toggle-thumb"></span></span>
+            <span class="toggle-label">Drag — follow cursor</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
     <div class="code-wrap">
-      <div class="code-bar"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div><span class="lang">THE CORRECT PATTERN</span></div>
-      <pre><span class="cm">/* 1. SVG filter lives in the document, NOT inside the element */</span>
-<span class="ck">&lt;svg</span> <span class="ca">style</span>=<span class="cs">"position:absolute;width:0;height:0"</span><span class="ck">&gt;</span>
-  <span class="ck">&lt;defs&gt;</span>
-    <span class="ck">&lt;filter</span> <span class="ca">id</span>=<span class="cs">"lg"</span><span class="ck">&gt;</span>
-      <span class="ck">&lt;feImage</span> <span class="ca">href</span>=<span class="cs">"data:image/png;base64,..."</span> <span class="ca">result</span>=<span class="cs">"tex"</span><span class="ck">/&gt;</span>
-      <span class="ck">&lt;feDisplacementMap</span>
-        <span class="ca">in</span>=<span class="cs">"SourceGraphic"</span>  <span class="cm">← the backdrop content</span>
-        <span class="ca">in2</span>=<span class="cs">"tex"</span>
-        <span class="ca">scale</span>=<span class="cs">"20"</span>
-        <span class="ca">xChannelSelector</span>=<span class="cs">"R"</span>
-        <span class="ca">yChannelSelector</span>=<span class="cs">"G"</span>
-      <span class="ck">/&gt;</span>
-    <span class="ck">&lt;/filter&gt;</span>
-  <span class="ck">&lt;/defs&gt;</span>
-<span class="ck">&lt;/svg&gt;</span>
-
-<span class="cm">/* 2. Apply via backdrop-filter — this warps the background, not the element */</span>
-<span class="cp">.glass-surface</span> {
-  <span class="ca">position</span>: <span class="cs">absolute</span>;
-  <span class="ca">inset</span>: <span class="cs">0</span>;
-  <span class="cm">/* KEY: backdrop-filter with url() reference */</span>
-  <span class="ca">backdrop-filter</span>: <span class="cs">url(#lg)</span>;
-  <span class="ca">-webkit-backdrop-filter</span>: <span class="cs">url(#lg)</span>;
-  <span class="ca">background-color</span>: <span class="cs">rgba(255,255,255,0.10)</span>; <span class="cm">/* tint */</span>
-  <span class="ca">border</span>: <span class="cs">1px solid rgba(255,255,255,0.20)</span>; <span class="cm">/* rim */</span>
-}</pre>
-    </div>
-  </div>
-
-  <!-- ══════════════════════════════════════════════════
-       SECTION 1 — VARIANTS
-  ══════════════════════════════════════════════════ -->
-  <div class="section">
-    <div class="section-title">Shape Variants</div>
-    <p class="section-desc">variant="pill" | "rounded" | "circle" | "squircle" | "sharp"</p>
-
-    <div class="stage bg-aurora" id="stage-variants">
-      <div class="blobs">
-        <div class="blob" style="width:200px;height:200px;background:#22c55e;top:-40px;left:60px;"></div>
-        <div class="blob" style="width:180px;height:180px;background:#3b82f6;bottom:-30px;right:80px;"></div>
-        <div class="blob" style="width:140px;height:140px;background:#a855f7;top:40px;right:140px;"></div>
+      <div class="code-bar">
+        <div class="dot" style="background:#ff5f57"></div>
+        <div class="dot" style="background:#febc2e"></div>
+        <div class="dot" style="background:#28c840"></div>
+        <span class="lang">TSX — LIVE</span>
       </div>
-
-      <!-- pill -->
-      <button class="glass" style="border-radius:9999px;padding:14px 36px;">
-        <span class="glass-surface" style="border-radius:9999px;backdrop-filter:url(#lgA);-webkit-backdrop-filter:url(#lgA);background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.20);"></span>
-        <span class="glass-specular"></span>
-        <span class="glass-label">Pill</span>
-      </button>
-
-      <!-- rounded -->
-      <button class="glass" style="border-radius:16px;padding:14px 36px;">
-        <span class="glass-surface" style="border-radius:16px;backdrop-filter:url(#lgA);-webkit-backdrop-filter:url(#lgA);background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.20);"></span>
-        <span class="glass-specular" style="border-radius:0 0 8px 8px / 0 0 100% 100%;"></span>
-        <span class="glass-label">Rounded</span>
-      </button>
-
-      <!-- circle -->
-      <button class="glass" style="border-radius:50%;width:100px;height:100px;padding:0;">
-        <span class="glass-surface" style="border-radius:50%;backdrop-filter:url(#lgA);-webkit-backdrop-filter:url(#lgA);background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.20);"></span>
-        <span class="glass-specular" style="left:25%;right:25%;border-radius:50%;"></span>
-        <span class="glass-label">Circle</span>
-      </button>
-
-      <!-- squircle -->
-      <button class="glass" style="border-radius:28px;padding:14px 36px;">
-        <span class="glass-surface" style="border-radius:28px;backdrop-filter:url(#lgA);-webkit-backdrop-filter:url(#lgA);background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.20);"></span>
-        <span class="glass-specular" style="border-radius:0 0 14px 14px / 0 0 100% 100%;"></span>
-        <span class="glass-label">Squircle</span>
-      </button>
-
-      <!-- sharp -->
-      <button class="glass" style="border-radius:4px;padding:14px 36px;">
-        <span class="glass-surface" style="border-radius:4px;backdrop-filter:url(#lgA);-webkit-backdrop-filter:url(#lgA);background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.20);"></span>
-        <span class="glass-specular" style="border-radius:0;left:0;right:0;"></span>
-        <span class="glass-label">Sharp</span>
-      </button>
-    </div>
-  </div>
-
-  <!-- ══════════════════════════════════════════════════
-       SECTION 2 — TINTS
-  ══════════════════════════════════════════════════ -->
-  <div class="section">
-    <div class="section-title">Tint Prop — tint="rgba(...)"</div>
-    <p class="section-desc">Change the fill color of the glass surface. The displacement effect is separate from the tint.</p>
-
-    <div class="stage bg-warm">
-      <div class="blobs">
-        <div class="blob" style="width:220px;height:220px;background:#f97316;top:-60px;left:50px;"></div>
-        <div class="blob" style="width:180px;height:180px;background:#ec4899;bottom:-40px;right:60px;"></div>
-      </div>
-
-      <!-- neutral -->
-      <button class="glass" style="border-radius:9999px;padding:14px 32px;">
-        <span class="glass-surface" style="border-radius:9999px;backdrop-filter:url(#lgA);-webkit-backdrop-filter:url(#lgA);background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.22);"></span>
-        <span class="glass-specular"></span>
-        <span class="glass-label">White 10%</span>
-      </button>
-
-      <!-- dark -->
-      <button class="glass" style="border-radius:9999px;padding:14px 32px;">
-        <span class="glass-surface" style="border-radius:9999px;backdrop-filter:url(#lgA);-webkit-backdrop-filter:url(#lgA);background:rgba(0,0,0,0.35);border:1px solid rgba(255,255,255,0.10);"></span>
-        <span class="glass-specular" style="background:linear-gradient(to bottom,rgba(255,255,255,0.08),transparent)"></span>
-        <span class="glass-label">Black 35%</span>
-      </button>
-
-      <!-- amber -->
-      <button class="glass" style="border-radius:9999px;padding:14px 32px;color:rgba(255,237,213,0.95);">
-        <span class="glass-surface" style="border-radius:9999px;backdrop-filter:url(#lgA);-webkit-backdrop-filter:url(#lgA);background:rgba(180,83,9,0.22);border:1px solid rgba(251,146,60,0.30);box-shadow:0 0 20px rgba(251,146,60,0.15);"></span>
-        <span class="glass-specular" style="background:linear-gradient(to bottom,rgba(255,200,100,0.22),transparent)"></span>
-        <span class="glass-label">Ember</span>
-      </button>
-
-      <!-- purple -->
-      <button class="glass" style="border-radius:9999px;padding:14px 32px;color:rgba(220,210,255,0.95);">
-        <span class="glass-surface" style="border-radius:9999px;backdrop-filter:url(#lgA);-webkit-backdrop-filter:url(#lgA);background:rgba(88,28,135,0.25);border:1px solid rgba(167,139,250,0.28);box-shadow:0 0 24px rgba(88,28,135,0.25);"></span>
-        <span class="glass-specular" style="background:linear-gradient(to bottom,rgba(200,180,255,0.20),transparent)"></span>
-        <span class="glass-label">Nebula</span>
-      </button>
-
-      <!-- green -->
-      <button class="glass" style="border-radius:9999px;padding:14px 32px;color:rgba(187,247,208,0.95);">
-        <span class="glass-surface" style="border-radius:9999px;backdrop-filter:url(#lgB);-webkit-backdrop-filter:url(#lgB);background:rgba(20,83,45,0.30);border:1px solid rgba(74,222,128,0.22);box-shadow:0 0 18px rgba(22,163,74,0.20);"></span>
-        <span class="glass-specular" style="background:linear-gradient(to bottom,rgba(134,239,172,0.18),transparent)"></span>
-        <span class="glass-label">Venom</span>
-      </button>
-    </div>
-  </div>
-
-  <!-- ══════════════════════════════════════════════════
-       SECTION 3 — SCALE (displacement intensity)
-  ══════════════════════════════════════════════════ -->
-  <div class="section">
-    <div class="section-title">Scale Prop — warp intensity</div>
-    <p class="section-desc">The <code>scale</code> attribute on feDisplacementMap controls how far each pixel is displaced. Live slider below updates it in real time.</p>
-
-    <div class="stage bg-ocean" style="flex-direction:column;gap:16px;">
-      <div class="blobs">
-        <div class="blob" style="width:250px;height:250px;background:#0ea5e9;top:-80px;left:40px;"></div>
-        <div class="blob" style="width:200px;height:200px;background:#6366f1;bottom:-60px;right:50px;"></div>
-      </div>
-
-      <div style="display:flex;align-items:center;gap:12px;z-index:10;width:100%;max-width:460px;">
-        <span style="font-size:11px;color:rgba(255,255,255,0.5);min-width:54px;">scale=</span>
-        <input type="range" id="scaleSlider" min="0" max="120" step="1" value="20"
-          style="flex:1;accent-color:#a78bfa;">
-        <span id="scaleVal" style="font-size:13px;font-weight:600;color:#a78bfa;min-width:32px;font-family:monospace;">20</span>
-      </div>
-
-      <button class="glass" id="scaleDemoBtn" style="border-radius:9999px;padding:16px 48px;font-size:14px;">
-        <span class="glass-surface" id="scaleDemoSurface"
-          style="border-radius:9999px;backdrop-filter:url(#lgA);-webkit-backdrop-filter:url(#lgA);background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.22);"></span>
-        <span class="glass-specular"></span>
-        <span class="glass-label">Drag the slider</span>
-      </button>
-    </div>
-  </div>
-
-  <!-- ══════════════════════════════════════════════════
-       SECTION 4 — NOISE TYPES
-  ══════════════════════════════════════════════════ -->
-  <div class="section">
-    <div class="section-title">Noise Types — noiseType prop</div>
-    <p class="section-desc">Each generates a different texture. The R channel drives x-displacement, G drives y.</p>
-
-    <div class="stage bg-nebula">
-      <div class="blobs">
-        <div class="blob" style="width:200px;height:200px;background:#7c3aed;top:-50px;left:80px;"></div>
-        <div class="blob" style="width:160px;height:160px;background:#db2777;bottom:-30px;right:100px;"></div>
-        <div class="blob" style="width:120px;height:120px;background:#0891b2;top:20px;right:60px;"></div>
-      </div>
-
-      <button class="glass" id="noiseDemo-fbm" style="border-radius:9999px;padding:13px 26px;">
-        <span class="glass-surface" style="border-radius:9999px;backdrop-filter:url(#lgA);-webkit-backdrop-filter:url(#lgA);background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.20);"></span>
-        <span class="glass-specular"></span>
-        <span class="glass-label">fBm</span>
-      </button>
-
-      <button class="glass" id="noiseDemo-ridged" style="border-radius:9999px;padding:13px 26px;">
-        <span class="glass-surface" style="border-radius:9999px;backdrop-filter:url(#lgB);-webkit-backdrop-filter:url(#lgB);background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.20);"></span>
-        <span class="glass-specular"></span>
-        <span class="glass-label">Ridged</span>
-      </button>
-
-      <button class="glass" id="noiseDemo-curl" style="border-radius:9999px;padding:13px 26px;">
-        <span class="glass-surface" style="border-radius:9999px;backdrop-filter:url(#lgC);-webkit-backdrop-filter:url(#lgC);background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.20);"></span>
-        <span class="glass-specular"></span>
-        <span class="glass-label">Curl</span>
-      </button>
-
-      <button class="glass" id="noiseDemo-fine" style="border-radius:9999px;padding:13px 26px;">
-        <span class="glass-surface" style="border-radius:9999px;backdrop-filter:url(#lgD);-webkit-backdrop-filter:url(#lgD);background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.20);"></span>
-        <span class="glass-specular"></span>
-        <span class="glass-label">Fine Grain</span>
-      </button>
-
-      <button class="glass" id="noiseDemo-crystal" style="border-radius:9999px;padding:13px 26px;">
-        <span class="glass-surface" style="border-radius:9999px;backdrop-filter:url(#lgE);-webkit-backdrop-filter:url(#lgE);background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.40);"></span>
-        <span class="glass-specular" style="background:linear-gradient(to bottom,rgba(255,255,255,0.38),transparent)"></span>
-        <span class="glass-label">Crystal</span>
-      </button>
-    </div>
-  </div>
-
-  <!-- ══════════════════════════════════════════════════
-       SECTION 5 — BLUR COMBO
-  ══════════════════════════════════════════════════ -->
-  <div class="section">
-    <div class="section-title">blur + displacement combined</div>
-    <p class="section-desc">Add a small blur alongside displacement for a frosted-liquid hybrid. Pure displacement (blur=0) gives the sharpest refraction.</p>
-
-    <div class="stage bg-forest">
-      <div class="blobs">
-        <div class="blob" style="width:200px;height:200px;background:#16a34a;top:-50px;left:60px;"></div>
-        <div class="blob" style="width:160px;height:160px;background:#0d9488;bottom:-40px;right:80px;"></div>
-      </div>
-
-      <!-- no blur — pure displacement -->
-      <button class="glass" style="border-radius:9999px;padding:14px 30px;">
-        <span class="glass-surface" style="border-radius:9999px;backdrop-filter:url(#lgA);-webkit-backdrop-filter:url(#lgA);background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.18);"></span>
-        <span class="glass-specular"></span>
-        <span class="glass-label">blur=0</span>
-      </button>
-
-      <!-- blur 4px -->
-      <button class="glass" style="border-radius:9999px;padding:14px 30px;">
-        <span class="glass-surface" style="border-radius:9999px;backdrop-filter:blur(4px) url(#lgA);-webkit-backdrop-filter:blur(4px) url(#lgA);background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.20);"></span>
-        <span class="glass-specular"></span>
-        <span class="glass-label">blur=4</span>
-      </button>
-
-      <!-- blur 10px -->
-      <button class="glass" style="border-radius:9999px;padding:14px 30px;">
-        <span class="glass-surface" style="border-radius:9999px;backdrop-filter:blur(10px) url(#lgA);-webkit-backdrop-filter:blur(10px) url(#lgA);background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.22);"></span>
-        <span class="glass-specular"></span>
-        <span class="glass-label">blur=10</span>
-      </button>
-
-      <!-- blur 20px -->
-      <button class="glass" style="border-radius:9999px;padding:14px 30px;">
-        <span class="glass-surface" style="border-radius:9999px;backdrop-filter:blur(20px) url(#lgA);-webkit-backdrop-filter:blur(20px) url(#lgA);background:rgba(255,255,255,0.14);border:1px solid rgba(255,255,255,0.25);"></span>
-        <span class="glass-specular"></span>
-        <span class="glass-label">blur=20</span>
-      </button>
-    </div>
-  </div>
-
-  <!-- ══════════════════════════════════════════════════
-       SECTION 6 — WOBBLE ANIMATION
-  ══════════════════════════════════════════════════ -->
-  <div class="section">
-    <div class="section-title">Wobble Animation — wobble prop</div>
-    <p class="section-desc">CSS scale animation creates an organic liquid-blob feel. Works great for circles.</p>
-
-    <div class="stage bg-fire" style="min-height:240px;">
-      <div class="blobs">
-        <div class="blob" style="width:220px;height:220px;background:#dc2626;top:-60px;left:50px;"></div>
-        <div class="blob" style="width:180px;height:180px;background:#d97706;bottom:-40px;right:60px;"></div>
-      </div>
-
-      <!-- wobble circle -->
-      <button class="glass" style="border-radius:50%;width:120px;height:120px;padding:0;animation:lg-wobble 4s ease-in-out infinite;color:rgba(255,237,213,0.9);">
-        <span class="glass-surface" style="border-radius:50%;backdrop-filter:url(#lgB);-webkit-backdrop-filter:url(#lgB);background:rgba(127,29,29,0.28);border:1.5px solid rgba(239,68,68,0.30);box-shadow:0 0 20px rgba(239,68,68,0.20);"></span>
-        <span class="glass-specular" style="top:8%;left:22%;right:22%;height:22%;border-radius:50%;background:linear-gradient(to bottom,rgba(255,150,100,0.25),transparent)"></span>
-        <span class="glass-label" style="flex-direction:column;gap:2px;">
-          <span style="font-size:20px;font-weight:700;font-family:serif;">🔥</span>
-          <span style="font-size:10px;opacity:.7;">Wobble</span>
-        </span>
-      </button>
-
-      <!-- slower wobble pill -->
-      <button class="glass" style="border-radius:9999px;padding:16px 40px;animation:lg-wobble 6s ease-in-out infinite;animation-delay:-2s;color:rgba(255,237,213,0.92);">
-        <span class="glass-surface" style="border-radius:9999px;backdrop-filter:url(#lgA);-webkit-backdrop-filter:url(#lgA);background:rgba(120,53,15,0.22);border:1px solid rgba(251,146,60,0.22);"></span>
-        <span class="glass-specular" style="background:linear-gradient(to bottom,rgba(255,200,100,0.20),transparent)"></span>
-        <span class="glass-label">Slow Wobble</span>
-      </button>
-    </div>
-  </div>
-
-  <!-- ══════════════════════════════════════════════════
-       SECTION 7 — AS PROP (different elements)
-  ══════════════════════════════════════════════════ -->
-  <div class="section">
-    <div class="section-title">as Prop — render as any element</div>
-    <p class="section-desc">as="div" | "a" | "span" | "button" — same glass, different semantics.</p>
-
-    <div class="stage bg-aurora">
-      <div class="blobs">
-        <div class="blob" style="width:180px;height:180px;background:#4ade80;top:-40px;left:80px;opacity:.4;"></div>
-        <div class="blob" style="width:160px;height:160px;background:#60a5fa;bottom:-30px;right:90px;opacity:.4;"></div>
-      </div>
-
-      <!-- div -->
-      <div class="glass" style="border-radius:9999px;padding:14px 30px;cursor:default;">
-        <span class="glass-surface" style="border-radius:9999px;backdrop-filter:url(#lgA);-webkit-backdrop-filter:url(#lgA);background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.20);"></span>
-        <span class="glass-specular"></span>
-        <span class="glass-label">as="div"</span>
-      </div>
-
-      <!-- a -->
-      <a href="#" class="glass" style="border-radius:9999px;padding:14px 30px;text-decoration:none;">
-        <span class="glass-surface" style="border-radius:9999px;backdrop-filter:url(#lgA);-webkit-backdrop-filter:url(#lgA);background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.20);"></span>
-        <span class="glass-specular"></span>
-        <span class="glass-label">as="a"</span>
-      </a>
-
-      <!-- badge span -->
-      <span class="glass" style="border-radius:9999px;padding:6px 16px;font-size:11px;cursor:default;">
-        <span class="glass-surface" style="border-radius:9999px;backdrop-filter:url(#lgA);-webkit-backdrop-filter:url(#lgA);background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.20);"></span>
-        <span class="glass-label">as="span" badge</span>
-      </span>
+      <pre id="play-code"></pre>
     </div>
   </div>
 
@@ -633,89 +551,200 @@ function generateTexture({ size=128,frequency=4,octaves=4,persistence=.5,lacunar
 }
 
 // ──────────────────────────────────────────────────────────────────────────
-// Inject textures into SVG filter feImage elements
+// Playground — state, presets, and live updates
 // ──────────────────────────────────────────────────────────────────────────
-function initFilters() {
-  const configs = {
-    "lgA-img": { noiseType:"fbm",   frequency:4, seed:42,  octaves:4 },
-    "lgB-img": { noiseType:"ridged",frequency:6, seed:9,   octaves:4 },
-    "lgC-img": { noiseType:"curl",  frequency:4, seed:61,  octaves:3 },
-    "lgD-img": { noiseType:"fbm",   frequency:12,seed:100, octaves:5 },
-    "lgE-img": { noiseType:"perlin",frequency:4, seed:7,   octaves:4 },
-  };
-  Object.entries(configs).forEach(([id, cfg]) => {
-    const el = document.getElementById(id);
-    if (el) el.setAttribute("href", generateTexture(cfg));
-  });
+const state = {
+  shape: "pill",
+  tint:  "white",
+  noise: "fbm",
+  scale: 20,
+  blur:  0,
+  wobble: false,
+  drag:   false,
+};
+
+const SHAPE = {
+  pill:     { radius:"9999px", padding:"18px 48px", size:null,
+              spec:{ radius:"0 0 50% 50% / 0 0 100% 100%", top:"1px", left:"15%", right:"15%", height:"35%" } },
+  rounded:  { radius:"18px",   padding:"18px 48px", size:null,
+              spec:{ radius:"0 0 9px 9px / 0 0 100% 100%",  top:"1px", left:"15%", right:"15%", height:"35%" } },
+  circle:   { radius:"50%",    padding:"0",         size:{ w:140, h:140 },
+              spec:{ radius:"50%",                          top:"8px", left:"25%", right:"25%", height:"28%" } },
+  squircle: { radius:"32px",   padding:"18px 48px", size:null,
+              spec:{ radius:"0 0 16px 16px / 0 0 100% 100%", top:"1px", left:"15%", right:"15%", height:"35%" } },
+  sharp:    { radius:"4px",    padding:"18px 48px", size:null,
+              spec:{ radius:"0",                             top:"1px", left:"0",   right:"0",   height:"30%" } },
+};
+
+const TINT = {
+  white:   { surface:"rgba(255,255,255,0.10)", border:"rgba(255,255,255,0.22)", glow:"none",
+             color:"rgba(255,255,255,0.95)",   spec:"linear-gradient(to bottom,rgba(255,255,255,0.22),transparent)" },
+  black:   { surface:"rgba(0,0,0,0.35)",       border:"rgba(255,255,255,0.10)", glow:"none",
+             color:"rgba(255,255,255,0.95)",   spec:"linear-gradient(to bottom,rgba(255,255,255,0.08),transparent)" },
+  ember:   { surface:"rgba(180,83,9,0.22)",    border:"rgba(251,146,60,0.30)",  glow:"0 0 22px rgba(251,146,60,0.20)",
+             color:"rgba(255,237,213,0.95)",   spec:"linear-gradient(to bottom,rgba(255,200,100,0.24),transparent)" },
+  nebula:  { surface:"rgba(88,28,135,0.25)",   border:"rgba(167,139,250,0.30)", glow:"0 0 26px rgba(88,28,135,0.30)",
+             color:"rgba(220,210,255,0.95)",   spec:"linear-gradient(to bottom,rgba(200,180,255,0.22),transparent)" },
+  venom:   { surface:"rgba(20,83,45,0.30)",    border:"rgba(74,222,128,0.24)",  glow:"0 0 20px rgba(22,163,74,0.24)",
+             color:"rgba(187,247,208,0.95)",   spec:"linear-gradient(to bottom,rgba(134,239,172,0.20),transparent)" },
+  crystal: { surface:"rgba(255,255,255,0.06)", border:"rgba(255,255,255,0.42)", glow:"0 0 18px rgba(255,255,255,0.14)",
+             color:"rgba(255,255,255,0.95)",   spec:"linear-gradient(to bottom,rgba(255,255,255,0.38),transparent)" },
+};
+
+const NOISE = {
+  fbm:     { noiseType:"fbm",    frequency:4,  seed:42,  octaves:4 },
+  ridged:  { noiseType:"ridged", frequency:6,  seed:9,   octaves:4 },
+  curl:    { noiseType:"curl",   frequency:4,  seed:61,  octaves:3 },
+  fine:    { noiseType:"fbm",    frequency:12, seed:100, octaves:5 },
+  crystal: { noiseType:"fbm",    frequency:3,  seed:7,   octaves:5 },
+};
+
+function updateTexture() {
+  const img = document.getElementById("lgPlay-img");
+  if (!img) return;
+  img.setAttribute("href", generateTexture(NOISE[state.noise]));
 }
 
-// ──────────────────────────────────────────────────────────────────────────
-// Scale slider — live update feDisplacementMap
-// ──────────────────────────────────────────────────────────────────────────
-function initSlider() {
-  const slider = document.getElementById("scaleSlider");
-  const val    = document.getElementById("scaleVal");
-  const dm     = document.getElementById("lgA-dm");
-  if (!slider || !val || !dm) return;
+function applyPlayground() {
+  const glass    = document.getElementById("play-glass");
+  const surface  = document.getElementById("play-surface");
+  const specular = document.getElementById("play-specular");
+  const stage    = document.getElementById("play-stage");
+  const dm       = document.getElementById("lgPlay-dm");
+  if (!glass || !surface || !specular || !stage) return;
 
-  let current = 20, target = 20, raf = 0;
-  const lerp = (a,b,t) => a+(b-a)*t;
+  const sh = SHAPE[state.shape];
+  const tn = TINT[state.tint];
 
-  const tick = () => {
-    current = lerp(current, target, 0.12);
-    dm.setAttribute("scale", current.toFixed(2));
-    if (Math.abs(current - target) > 0.05) raf = requestAnimationFrame(tick);
-  };
+  glass.style.borderRadius = sh.radius;
+  glass.style.padding      = sh.padding;
+  glass.style.color        = tn.color;
+  glass.style.width        = sh.size ? sh.size.w + "px" : "";
+  glass.style.height       = sh.size ? sh.size.h + "px" : "";
+  glass.style.animation    = state.wobble ? "lg-wobble 4s ease-in-out infinite" : "none";
 
-  slider.addEventListener("input", () => {
-    target = parseFloat(slider.value);
-    val.textContent = slider.value;
-    cancelAnimationFrame(raf);
-    raf = requestAnimationFrame(tick);
-  });
+  const filterStr = (state.blur > 0 ? "blur(" + state.blur + "px) " : "") + "url(#lgPlay)";
+  surface.style.borderRadius          = sh.radius;
+  surface.style.background            = tn.surface;
+  surface.style.border                = "1px solid " + tn.border;
+  surface.style.backdropFilter        = filterStr;
+  surface.style.webkitBackdropFilter  = filterStr;
+  surface.style.boxShadow             = tn.glow === "none" ? "" : tn.glow;
+
+  specular.style.borderRadius = sh.spec.radius;
+  specular.style.top          = sh.spec.top;
+  specular.style.left         = sh.spec.left;
+  specular.style.right        = sh.spec.right;
+  specular.style.height       = sh.spec.height;
+  specular.style.background   = tn.spec;
+
+  const wasDragging = glass.classList.contains("dragging");
+  stage.classList.toggle("is-drag", state.drag);
+  glass.classList.toggle("dragging", state.drag);
+  if (!state.drag) {
+    glass.style.left = "";
+    glass.style.top  = "";
+  } else if (!wasDragging) {
+    const sr = stage.getBoundingClientRect();
+    const gr = glass.getBoundingClientRect();
+    glass.style.left = (sr.width / 2 - gr.width / 2) + "px";
+    glass.style.top  = (sr.height / 2 - gr.height / 2) + "px";
+  }
+
+  if (dm) dm.setAttribute("scale", state.scale);
 }
 
-// ──────────────────────────────────────────────────────────────────────────
-// Hover scale lerp for all glass buttons
-// ──────────────────────────────────────────────────────────────────────────
-function initHoverEffects() {
-  const hoverMap = {
-    "lgA-dm": { base: 20,  hover: 38  },
-    "lgB-dm": { base: 38,  hover: 70  },
-    "lgC-dm": { base: 16,  hover: 30  },
-    "lgD-dm": { base: 14,  hover: 26  },
-    "lgE-dm": { base: 55,  hover: 100 },
-  };
-
-  document.querySelectorAll(".glass").forEach(btn => {
-    // find which filter this button uses
-    const surface = btn.querySelector(".glass-surface");
-    if (!surface) return;
-    const bf = surface.style.backdropFilter || "";
-    const match = bf.match(/url\(#(lg[A-Z])\)/);
-    if (!match) return;
-    const dmId = match[1] + "-dm";
-    const dm = document.getElementById(dmId);
-    if (!dm) return;
-    const { base, hover } = hoverMap[dmId] || { base: 20, hover: 38 };
-
-    let cur = base, tar = base, raf = 0;
-    const lerp = (a,b,t) => a+(b-a)*t;
-    const tick = () => {
-      cur = lerp(cur, tar, 0.12);
-      dm.setAttribute("scale", cur.toFixed(2));
-      if (Math.abs(cur - tar) > 0.05) raf = requestAnimationFrame(tick);
-    };
-
-    btn.addEventListener("mouseenter", () => { tar = hover; cancelAnimationFrame(raf); raf = requestAnimationFrame(tick); });
-    btn.addEventListener("mouseleave", () => { tar = base;  cancelAnimationFrame(raf); raf = requestAnimationFrame(tick); });
-  });
+function updateCode() {
+  const code = document.getElementById("play-code");
+  if (!code) return;
+  const tn = TINT[state.tint];
+  const lines = [];
+  lines.push('<span class="ck">&lt;LiquidGlass</span>');
+  lines.push('  <span class="ca">variant</span>=<span class="cs">"' + state.shape + '"</span>');
+  lines.push('  <span class="ca">tint</span>=<span class="cs">"' + tn.surface + '"</span>');
+  lines.push('  <span class="ca">rim</span>=<span class="cs">"' + tn.border + '"</span>');
+  lines.push('  <span class="ca">noiseType</span>=<span class="cs">"' + state.noise + '"</span>');
+  lines.push('  <span class="ca">scale</span>={<span class="cp">' + state.scale + '</span>}');
+  lines.push('  <span class="ca">blur</span>={<span class="cp">' + state.blur + '</span>}');
+  if (state.wobble) lines.push('  <span class="ca">wobble</span>');
+  if (state.drag)   lines.push('  <span class="ca">draggable</span>');
+  lines.push('<span class="ck">&gt;</span>');
+  lines.push('  Liquid Glass');
+  lines.push('<span class="ck">&lt;/LiquidGlass&gt;</span>');
+  code.innerHTML = lines.join("\n");
 }
 
-// ── Init ──────────────────────────────────────────────────────────────────
-initFilters();
-initSlider();
-initHoverEffects();
+function initPlayground() {
+  document.querySelectorAll(".chip-row").forEach(row => {
+    const ctl = row.dataset.control;
+    row.addEventListener("click", e => {
+      const chip = e.target.closest(".chip");
+      if (!chip || !row.contains(chip)) return;
+      row.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
+      chip.classList.add("active");
+      state[ctl] = chip.dataset.value;
+      if (ctl === "noise") updateTexture();
+      applyPlayground();
+      updateCode();
+    });
+  });
+
+  const scaleSlider = document.getElementById("play-scale");
+  const scaleVal    = document.getElementById("val-scale");
+  scaleSlider.addEventListener("input", () => {
+    state.scale = parseInt(scaleSlider.value, 10);
+    scaleVal.textContent = scaleSlider.value;
+    applyPlayground();
+    updateCode();
+  });
+
+  const blurSlider = document.getElementById("play-blur");
+  const blurVal    = document.getElementById("val-blur");
+  blurSlider.addEventListener("input", () => {
+    state.blur = parseInt(blurSlider.value, 10);
+    blurVal.textContent = blurSlider.value + "px";
+    applyPlayground();
+    updateCode();
+  });
+
+  const wobble = document.getElementById("play-wobble");
+  wobble.addEventListener("change", () => {
+    state.wobble = wobble.checked;
+    applyPlayground();
+    updateCode();
+  });
+
+  const drag  = document.getElementById("play-drag");
+  const stage = document.getElementById("play-stage");
+  const glass = document.getElementById("play-glass");
+
+  drag.addEventListener("change", () => {
+    state.drag = drag.checked;
+    applyPlayground();
+    updateCode();
+  });
+
+  let rafId = 0, pendingX = 0, pendingY = 0;
+  const positionGlass = () => {
+    rafId = 0;
+    const rect = glass.getBoundingClientRect();
+    glass.style.left = (pendingX - rect.width  / 2) + "px";
+    glass.style.top  = (pendingY - rect.height / 2) + "px";
+  };
+  stage.addEventListener("mousemove", e => {
+    if (!state.drag) return;
+    const r = stage.getBoundingClientRect();
+    pendingX = e.clientX - r.left;
+    pendingY = e.clientY - r.top;
+    if (!rafId) rafId = requestAnimationFrame(positionGlass);
+  });
+
+  updateTexture();
+  applyPlayground();
+  updateCode();
+}
+
+initPlayground();
 </script>
 </body>
 </html>

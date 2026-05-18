@@ -1,27 +1,7 @@
 # 💧 LiquidGlass
 
-One React component. All props. Real liquid glass via SVG `feDisplacementMap` applied through `backdrop-filter: url()`.
+One React component. All props. Real liquid glass.
 
----
-
-## The key insight (why most implementations fail)
-
-Most "liquid glass" tutorials apply the SVG filter **to the element itself**:
-```css
-/* ❌ WRONG — this distorts the element, not the background */
-filter: url(#liquidGlass);
-```
-
-The correct approach uses `backdrop-filter` with a URL reference. This applies the displacement **to the content behind the element** — exactly how real glass refracts:
-```css
-/* ✅ CORRECT — this warps the backdrop content */
-backdrop-filter: url(#liquidGlass);
--webkit-backdrop-filter: url(#liquidGlass);
-```
-
-The SVG filter lives in the document (not inside the element) so the `url()` reference resolves correctly.
-
----
 
 ## Install
 

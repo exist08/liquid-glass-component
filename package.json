@@ -1,16 +1,25 @@
 {
   "name": "liquid-glass-component",
-  "version": "1.1.1",
-  "description": "One component. Infinite liquid glass variants. SVG feDisplacementMap + feImage.",
+  "version": "1.1.2",
+  "description": "Real liquid glass for React. SVG feDisplacementMap refraction — not a blurred rectangle.",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
+  "homepage": "https://exist08.github.io/liquid-glass-component/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/exist08/liquid-glass-component.git"
+  },
+  "bugs": {
+    "url": "https://github.com/exist08/liquid-glass-component/issues"
+  },
   "files": [
     "dist"
   ],
+  "sideEffects": false,
   "scripts": {
     "build": "tsup src/index.ts --format cjs,esm --dts",
-    "dev": "tsc --watch",
+    "dev": "tsup src/index.ts --format cjs,esm --dts --watch",
     "prepublishOnly": "npm run build"
   },
   "peerDependencies": {
@@ -25,11 +34,18 @@
   },
   "keywords": [
     "liquid-glass",
-    "react",
-    "svg",
     "glassmorphism",
+    "react",
+    "react-component",
+    "svg",
     "displacement",
-    "ui"
+    "refraction",
+    "ui",
+    "animation",
+    "nextjs"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  }
 }

@@ -11,6 +11,9 @@ src/
 tsconfig.json
 demo.html
 aerial.jpg
+og.png
+sitemap.xml
+index.html
 *.tgz
 coverage/
 .nyc_output/

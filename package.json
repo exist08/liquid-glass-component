@@ -1,6 +1,6 @@
 {
   "name": "liquid-glass-component",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "Real liquid glass for React & Next.js — SVG feDisplacementMap refraction, not a blurred rectangle. Glassmorphism navbars, buttons, cards. ~3 KB, zero deps, TypeScript.",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
